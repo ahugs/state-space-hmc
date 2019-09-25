@@ -16,14 +16,12 @@ class HamiltonianMCMC(BaseMCMC):
             self.proposal_density = MultivariateNormal(np.zeros(len(q_0)), 1*np.eye(len(q_0)))
 
     def propose(self, current):
-        # Make a Metropolis Hastings Propsoal
         p_curr = self.proposal_density.sample()
         leapfrog_integrator = LeapfrogIntegrator(self.target_density, self.proposal_density, current, p_curr)
         q, p = leapfrog_integrator.integrate()
         return (current, p_curr), (q, -1 * p)
 
     def accept_reject(self, current, proposal):
-        # Accept/reject proposal
         q, p = proposal
         q_curr, p_curr = current
 

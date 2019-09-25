@@ -13,6 +13,7 @@ target_density = MultivariateNormal(0, 1*np.eye(1))
 mh_mcmc = HamiltonianMCMC(target_density, q_0=np.array([0]), n=10000)
 chain = mh_mcmc.run_chain()
 print(np.mean(chain[0,2000:10000]))
+print(np.std(chain[0, 2000:10000]))
 print(chain[:,9000:10000])
 
 #print(target_density.evaluate(23))
